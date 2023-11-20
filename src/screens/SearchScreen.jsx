@@ -1,9 +1,10 @@
-import { StyleSheet, Animated } from 'react-native'
+import { StyleSheet, Animated, View } from 'react-native'
 import React, { useState } from 'react'
 import { Screen } from '../components/screen'
 import Card from '../components/Card';
 import { LISTMARGIN, HEADERHEIGHT } from '../../constant';
 import AnimatedListHeader from '../components/AnimatedListHeader';
+import MapView from 'react-native-maps';
 
 const SearchScreen = () => {
 
@@ -67,7 +68,10 @@ const SearchScreen = () => {
   return (
     <Screen>
       <AnimatedListHeader scrollAnimation={scrollAnimation}/>
-      <Animated.FlatList
+      <View style={{flex: 1, paddingTop: HEADERHEIGHT - 20}}>
+        <MapView style={{width: "100%", height: "100%"}}/>
+      </View>
+      {/* <Animated.FlatList
         onScroll={Animated.event(
           [
             {
@@ -89,7 +93,7 @@ const SearchScreen = () => {
         renderItem={({ item }) => (
           <Card property={item} style={{ marginVertical: 5 }} />
         )}
-      />
+      /> */}
     </Screen>
   )
 }
