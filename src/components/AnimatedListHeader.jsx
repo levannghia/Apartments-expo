@@ -7,7 +7,6 @@ import { Text, Button, Divider } from '@ui-kitten/components'
 import Row from './Row';
 
 const AnimatedListHeader = ({ scrollAnimation, mapShown, setMapShown }) => {
-    console.log("map", mapShown);
     const [offsetAnimation] = useState(new Animated.Value(0))
     const [clampedScroll, setClampedScroll] = useState(
         Animated.diffClamp(
@@ -113,11 +112,8 @@ const AnimatedListHeader = ({ scrollAnimation, mapShown, setMapShown }) => {
                                 marginHorizontal: 3,
                             }}
                                 onPress={item.onPress}
-                                accessoryLeft={
-                                    <MaterialCommunityIcons name={item.iconName} size={20} color={theme['color-primary-500']} />
-                                }
-                            >
-                            </Button>
+                               
+                            ><MaterialCommunityIcons name={item.iconName} size={20} color={theme['color-primary-500']} /></Button>
                         }
 
                         return <Button appearance={'ghost'}
@@ -126,6 +122,7 @@ const AnimatedListHeader = ({ scrollAnimation, mapShown, setMapShown }) => {
                                 borderColor: '#d3d3d3',
                                 marginHorizontal: 3,
                             }}
+                            onPress={item.onPress}
                         >
                             {item.lable}
                         </Button>

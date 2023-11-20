@@ -4,7 +4,7 @@ import { Screen } from '../components/screen'
 import Card from '../components/Card';
 import { LISTMARGIN, HEADERHEIGHT } from '../../constant';
 import AnimatedListHeader from '../components/AnimatedListHeader';
-import MapView from 'react-native-maps';
+import Map from '../components/Map';
 
 const SearchScreen = () => {
 
@@ -24,7 +24,9 @@ const SearchScreen = () => {
       city: "Ha Noi",
       state: "Forola",
       zip: 319009,
-      tags: ["Parking", "Value0"]
+      tags: ["Parking", "Value0"],
+      lat: 25.761681,
+      lng: -80.191788
     },
     {
       id: 2,
@@ -41,7 +43,9 @@ const SearchScreen = () => {
       city: "Ha Noi",
       state: "Forola",
       zip: 319009,
-      tags: ["Parking", "Value0"]
+      tags: ["Parking", "Value0"],
+      lat: 25.77427,
+      lng: -80.1323
     },
     {
       id: 3,
@@ -58,7 +62,9 @@ const SearchScreen = () => {
       city: "Ha Noi",
       state: "Forola",
       zip: 319009,
-      tags: ["Parking", "Value0"]
+      tags: ["Parking", "Value0"],
+      lat: 25.77427,
+      lng: -80.1323
     }
   ];
 
@@ -69,10 +75,8 @@ const SearchScreen = () => {
     <Screen>
       <AnimatedListHeader scrollAnimation={scrollAnimation} mapShown={mapShown} setMapShown={setMapShown} />
       {mapShown ?
-        <View style={{ flex: 1, paddingTop: HEADERHEIGHT - 20 }}>
-          <MapView style={{ width: "100%", height: "100%" }} />
-        </View> :
-        <Animated.FlatList
+        <Map properties={properties}/> :
+        (<Animated.FlatList
           onScroll={Animated.event(
             [
               {
@@ -94,7 +98,7 @@ const SearchScreen = () => {
           renderItem={({ item }) => (
             <Card property={item} style={{ marginVertical: 5 }} />
           )}
-        />}
+        />)}
     </Screen>
   )
 }
