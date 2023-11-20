@@ -1,4 +1,4 @@
-import {SafeAreaView, View, StyleSheet, ViewStyle, Platform, StatusBar} from 'react-native'
+import {SafeAreaView, StyleSheet, Platform, StatusBar} from 'react-native'
 
 export const Screen = ({children, style}) => {
     return (

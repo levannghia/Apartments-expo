@@ -6,8 +6,8 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Text, Button, Divider } from '@ui-kitten/components'
 import Row from './Row';
 
-const AnimatedListHeader = ({ scrollAnimation }) => {
-
+const AnimatedListHeader = ({ scrollAnimation, mapShown, setMapShown }) => {
+    console.log("map", mapShown);
     const [offsetAnimation] = useState(new Animated.Value(0))
     const [clampedScroll, setClampedScroll] = useState(
         Animated.diffClamp(
@@ -65,6 +65,13 @@ const AnimatedListHeader = ({ scrollAnimation }) => {
             onPress: () => console.log("pets"),
         },
     ]
+
+    const handleMapPress = () => {
+        if (mapShown) return setMapShown(false);
+        setMapShown(true);
+        console.log(mapShown);
+    }
+
 
     return (
         <Animated.View style={{
@@ -136,17 +143,25 @@ const AnimatedListHeader = ({ scrollAnimation }) => {
                 </Row>
                 <Row>
                     <TouchableOpacity>
-                        <Row style={{alignItems: 'center'}}>
+                        <Row style={{ alignItems: 'center' }}>
                             <MaterialCommunityIcons name='sort' size={18} color={theme['color-info-500']} />
                             <Text category='c1' style={{ color: theme['color-info-500'], fontWeight: 'bold', marginLeft: 5 }}>Sort</Text>
                         </Row>
                     </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Row style={{alignItems: 'center', marginLeft: 20}}>
-                            <MaterialCommunityIcons name='map-outline' size={18} color={theme['color-info-500']} />
-                            <Text category='c1' style={{ color: theme['color-info-500'], fontWeight: 'bold', marginLeft: 5 }}>Map</Text>
-                        </Row>
-                    </TouchableOpacity>
+                    {mapShown ?
+                        (<TouchableOpacity onPress={handleMapPress}>
+                            <Row style={{ alignItems: 'center', marginLeft: 20 }}>
+                                <MaterialCommunityIcons name='format-list-bulleted' size={18} color={theme['color-info-500']} />
+                                <Text category='c1' style={{ color: theme['color-info-500'], fontWeight: 'bold', marginLeft: 5 }}>List</Text>
+                            </Row>
+                        </TouchableOpacity>) :
+                        (<TouchableOpacity onPress={handleMapPress}>
+                            <Row style={{ alignItems: 'center', marginLeft: 20 }}>
+                                <MaterialCommunityIcons name='map-outline' size={18} color={theme['color-info-500']} />
+                                <Text category='c1' style={{ color: theme['color-info-500'], fontWeight: 'bold', marginLeft: 5 }}>Map</Text>
+                            </Row>
+                        </TouchableOpacity>)
+                    }
                 </Row>
             </Row>
         </Animated.View>

@@ -63,37 +63,38 @@ const SearchScreen = () => {
   ];
 
   const [scrollAnimation] = useState(new Animated.Value(0))
-
-
+  const [mapShown, setMapShown] = useState(false)
+  
   return (
     <Screen>
-      <AnimatedListHeader scrollAnimation={scrollAnimation}/>
-      <View style={{flex: 1, paddingTop: HEADERHEIGHT - 20}}>
-        <MapView style={{width: "100%", height: "100%"}}/>
-      </View>
-      {/* <Animated.FlatList
-        onScroll={Animated.event(
-          [
-            {
-              nativeEvent: {
-                contentOffset: {
-                  y: scrollAnimation,
+      <AnimatedListHeader scrollAnimation={scrollAnimation} mapShown={mapShown} setMapShown={setMapShown} />
+      {mapShown ?
+        <View style={{ flex: 1, paddingTop: HEADERHEIGHT - 20 }}>
+          <MapView style={{ width: "100%", height: "100%" }} />
+        </View> :
+        <Animated.FlatList
+          onScroll={Animated.event(
+            [
+              {
+                nativeEvent: {
+                  contentOffset: {
+                    y: scrollAnimation,
+                  },
                 },
               },
-            },
-          ],
-          { useNativeDriver: true }
-        )}
-        scrollEventThrottle={16}
-        bounces={false}
-        contentContainerStyle={{paddingTop: HEADERHEIGHT - 20, marginHorizontal: LISTMARGIN }}
-        showsVerticalScrollIndicator={false}
-        data={properties}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <Card property={item} style={{ marginVertical: 5 }} />
-        )}
-      /> */}
+            ],
+            { useNativeDriver: true }
+          )}
+          scrollEventThrottle={16}
+          bounces={false}
+          contentContainerStyle={{ paddingTop: HEADERHEIGHT - 20, marginHorizontal: LISTMARGIN }}
+          showsVerticalScrollIndicator={false}
+          data={properties}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <Card property={item} style={{ marginVertical: 5 }} />
+          )}
+        />}
     </Screen>
   )
 }

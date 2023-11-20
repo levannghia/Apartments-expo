@@ -4,8 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AccountScreen, SearchScreen, SavedScreen, NotFoundScreen, ModalScreen } from '../screens';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { myTheme } from '../../custom-theme';
-
+import { default as theme } from '../../theme.json';
 
 export function Navigation() {
     return (
@@ -36,7 +35,7 @@ const Tab = createBottomTabNavigator();
 function BottomTabNavigator() {
     return (
         <Tab.Navigator initialRouteName='Search' screenOptions={{
-            tabBarActiveTintColor: myTheme['color-primary-500'],
+            tabBarActiveTintColor: theme['color-primary-500'],
             headerShown: false,
         }}>
             <Tab.Screen name="Saved" component={SavedScreen} options={{
