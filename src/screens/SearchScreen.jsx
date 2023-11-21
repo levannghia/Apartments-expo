@@ -1,4 +1,4 @@
-import { StyleSheet, Animated, View } from 'react-native'
+import { Animated } from 'react-native'
 import React, { useState } from 'react'
 import { Screen } from '../components/screen'
 import Card from '../components/Card';
@@ -104,5 +104,3 @@ const SearchScreen = () => {
 }
 
 export default SearchScreen
-
-const styles = StyleSheet.create({})

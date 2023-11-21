@@ -80,6 +80,7 @@ const AnimatedListHeader = ({ scrollAnimation, mapShown, setMapShown }) => {
             left: 0,
             zIndex: 1000,
             height: HEADERHEIGHT,
+            backgroundColor: '#ffffff',
             transform: [{ translateY: navbarTranslate }]
         }}
             onLayout={onLayout}
@@ -112,8 +113,7 @@ const AnimatedListHeader = ({ scrollAnimation, mapShown, setMapShown }) => {
                                 marginHorizontal: 3,
                             }}
                                 onPress={item.onPress}
-                               
-                            ><MaterialCommunityIcons name={item.iconName} size={20} color={theme['color-primary-500']} /></Button>
+                            ><MaterialCommunityIcons name={item.iconName} size={30} color={theme['color-primary-500']} /></Button>
                         }
 
                         return <Button appearance={'ghost'}

@@ -4,7 +4,7 @@ import { HEADERHEIGHT } from '../../constant'
 import { useNavigation } from '@react-navigation/native'
 import MapMarker from './MapMarker'
 import { default as theme } from '../../theme.json';
-import { Card } from '../components/Card'
+import Card  from './Card'
 import MapView from 'react-native-maps';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -35,11 +35,9 @@ const Map = ({ properties }) => {
         }
 
         setActiveIndex(index);
-        console.log(index);
         navigation.setOptions({ tabBarStyle: { display: "none" } });
     }
 
-    console.log(activeIndex);
     return (
         <View style={styles.container}>
             <MapView style={{ width: "100%", height: "100%" }} userInterfaceStyle={'light'} ref={mapRef} onPress={handleMapPress}>
