@@ -68,7 +68,6 @@ const AnimatedListHeader = ({ scrollAnimation, mapShown, setMapShown }) => {
     const handleMapPress = () => {
         if (mapShown) return setMapShown(false);
         setMapShown(true);
-        console.log(mapShown);
     }
 
 
