@@ -5,8 +5,10 @@ import { default as theme } from '../../theme.json';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Text, Button, Divider } from '@ui-kitten/components'
 import Row from './Row';
+import { useNavigation } from '@react-navigation/native';
 
 const AnimatedListHeader = ({ scrollAnimation, mapShown, setMapShown }) => {
+    const navigation = useNavigation();
     const [offsetAnimation] = useState(new Animated.Value(0))
     const [clampedScroll, setClampedScroll] = useState(
         Animated.diffClamp(
@@ -91,7 +93,9 @@ const AnimatedListHeader = ({ scrollAnimation, mapShown, setMapShown }) => {
                     borderColor: '#d3d3d3',
                     borderRadius: 30,
                     padding: 10,
-                }}>
+                }}
+                onPress={() => navigation.navigate("FindLocation")}
+                >
                     <Row style={{ alignItems: 'center' }}>
                         <MaterialCommunityIcons name='magnify' color={theme['color-primary-500']} size={28} />
                         <Text style={{ marginLeft: 10 }}>Find a Location</Text>

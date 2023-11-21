@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AccountScreen, SearchScreen, SavedScreen, NotFoundScreen, ModalScreen } from '../screens';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { default as theme } from '../../theme.json';
+import FindLocationScreen from '../screens/FindLocationScreen';
 
 export function Navigation() {
     return (
@@ -19,12 +20,16 @@ const Stack = createNativeStackNavigator();
 function RootNavigator() {
     return (
         <Stack.Navigator>
-            <Stack.Screen name="Root" component={BottomTabNavigator}  options={{
+            <Stack.Screen name="Root" component={BottomTabNavigator} options={{
                 headerShown: false
-            }}/>
+            }} />
+            
             <Stack.Screen name="NotFound" component={NotFoundScreen} />
             <Stack.Group screenOptions={{ presentation: "modal" }}>
                 <Stack.Screen name="Modal" component={ModalScreen} />
+                <Stack.Screen name="FindLocation" component={FindLocationScreen} options={{
+                headerShown: false
+            }} />
             </Stack.Group>
         </Stack.Navigator>
     )
