@@ -7,15 +7,24 @@ export const getSuggestedLocation = async (text, limit) => {
         if(limit){
             finalLimit = limit
         }
-        const url = `${endpoints.autoComplete}?location=${text}&limit=${finalLimit}`;
-        const {data} = await axios.get(url)
+        const url = `${endpoints.autoCompeleteEndpoint}?location=${text}&limit=${finalLimit}`;
+        const {data} = await axios.get(url, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+              },
+        })
+
+        // const data = await fetch(url).then(res => console.log(res))
+
+        console.log(data);
 
         if(data){
             return data
         }
         return []
     } catch (error) {
-        console.log(error.message);
+        console.log(error);
         return []
     }
 }

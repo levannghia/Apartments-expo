@@ -8,11 +8,13 @@ import Row from '../components/Row'
 import { useNavigation } from '@react-navigation/native'
 import { LISTMARGIN } from '../../constant'
 import { getSuggestedLocation } from '../services/location'
+import { debounce } from 'lodash'
 
 const FindLocationScreen = () => {
     const [value, setValue] = useState("");
     const [suggestions, setSuggestion] = useState([])
     const navigation = useNavigation()
+
     const handleSubmitEditing = async () => {
         const locations = await getSuggestedLocation(value)
         if (location.length > 0) {
@@ -25,12 +27,18 @@ const FindLocationScreen = () => {
         setValue(val)
 
         if (val.length > 2) {
-            const locations = await getSuggestedLocation(value)
-            if (locations.length > 0) {
-                setSuggestion(locations)
-            } else if (val.length === 0) {
-                setSuggestion([])
-            }
+            const debounceSearch = debounce(async () => {
+                const locations = await getSuggestedLocation(value)
+                if (locations.length > 0) {
+                    setSuggestion(locations)
+                } else if (val.length === 0) {
+                    setSuggestion([])
+                }
+            }, 500)
+
+            debounceSearch();
+        }else{
+            setSuggestion([])
         }
     }
 

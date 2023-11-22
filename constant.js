@@ -13,7 +13,7 @@ androidHeight += androidNotch;
 
 export const HEADERHEIGHT = Platform.OS === "ios" ? iosHeight : androidHeight;
 
-const serverUrl = "http://127.0.0.1:8000/api";
+const serverUrl = "http://testlrv.praz.vn/api";
 const location = '/location';
 
 const locationEndpoint = serverUrl + location;
