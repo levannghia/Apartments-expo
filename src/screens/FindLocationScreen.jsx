@@ -1,4 +1,4 @@
-import { StyleSheet, View, Platform, FlatList, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Platform, FlatList, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import { Screen } from '../components/screen'
 import ModalHeader from '../components/ModalHeader'
@@ -10,6 +10,7 @@ import { LISTMARGIN } from '../../constant'
 import { getSuggestedLocation } from '../services/location'
 import { debounce } from 'lodash'
 import { getFormattedLocationText } from '../utils/getFormattedLocationText'
+import CurrentLocationButton from '../components/CurrentLocationButton'
 
 const FindLocationScreen = () => {
     const [value, setValue] = useState("");
@@ -113,7 +114,11 @@ const FindLocationScreen = () => {
                             </TouchableOpacity>
                         )}
                     />)
-                    : null
+                    : (
+                        <ScrollView bounces={false}>
+                            <CurrentLocationButton style={styles.CurrentLocationButton}/>
+                        </ScrollView>
+                    )
                 }
             </View>
         </Screen>
@@ -134,4 +139,8 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: '#d4d4d4',
     },
+
+    CurrentLocationButton: {
+        marginTop: 40
+    }
 })

@@ -7,7 +7,7 @@ import { Text, Button, Divider } from '@ui-kitten/components'
 import Row from './Row';
 import { useNavigation } from '@react-navigation/native';
 
-const AnimatedListHeader = ({ scrollAnimation, mapShown, setMapShown }) => {
+const AnimatedListHeader = ({ scrollAnimation, mapShown, setMapShown, location }) => {
     const navigation = useNavigation();
     const [offsetAnimation] = useState(new Animated.Value(0))
     const [clampedScroll, setClampedScroll] = useState(
@@ -98,7 +98,7 @@ const AnimatedListHeader = ({ scrollAnimation, mapShown, setMapShown }) => {
                 >
                     <Row style={{ alignItems: 'center' }}>
                         <MaterialCommunityIcons name='magnify' color={theme['color-primary-500']} size={28} />
-                        <Text style={{ marginLeft: 10 }}>Find a Location</Text>
+                        <Text style={{ marginLeft: 10 }}>{location}</Text>
                     </Row>
                 </TouchableOpacity>
                 <FlatList

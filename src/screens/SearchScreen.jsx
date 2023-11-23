@@ -85,7 +85,12 @@ const SearchScreen = ({ route }) => {
 
   return (
     <Screen>
-      <AnimatedListHeader scrollAnimation={scrollAnimation} mapShown={mapShown} setMapShown={setMapShown} />
+      <AnimatedListHeader 
+      scrollAnimation={scrollAnimation} 
+      mapShown={mapShown} 
+      setMapShown={setMapShown} 
+      location={route.params ? route.params.location : "Find Location"}
+      />
       {mapShown ?
         <Map properties={properties} mapRef={mapRef} initialRegion={
           route.params
