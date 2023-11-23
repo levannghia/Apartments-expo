@@ -8,9 +8,9 @@ import Card  from './Card'
 import MapView from 'react-native-maps';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-const Map = ({ properties }) => {
+const Map = ({ properties, mapRef, initialRegion }) => {
     const [activeIndex, setActiveIndex] = useState(-1)
-    const mapRef = useRef()
+    // const mapRef = useRef()
     const navigation = useNavigation()
 
     const unFocusProperty = () => {

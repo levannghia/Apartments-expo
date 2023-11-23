@@ -43,6 +43,18 @@ const FindLocationScreen = () => {
         }
     }
 
+    const handleNavigate = (location) => {
+        navigation.navigate('Root', {
+            screen: 'Search',
+            params: {
+                location: getFormattedLocationText(location),
+                lat: location.lat,
+                lon: location.lon,
+                boundingBox: location.boundingbox
+            }
+        })
+    }
+
     const getInput = () => {
         if (Platform.OS === 'ios') {
             return (
@@ -96,7 +108,7 @@ const FindLocationScreen = () => {
                         data={suggestions}
                         showsVerticalScrollIndicator={false}
                         renderItem={({ item }) => (
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={() => handleNavigate(item)}>
                                 <SuggestedText locationItem={item} />
                             </TouchableOpacity>
                         )}
