@@ -15,10 +15,6 @@ export const getSuggestedLocation = async (text, limit) => {
               },
         })
 
-        // const data = await fetch(url).then(res => console.log(res))
-
-        console.log(data);
-
         if(data){
             return data
         }

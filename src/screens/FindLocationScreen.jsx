@@ -1,14 +1,15 @@
-import { StyleSheet, Text, View, Platform } from 'react-native'
+import { StyleSheet, View, Platform, FlatList, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { Screen } from '../components/screen'
 import ModalHeader from '../components/ModalHeader'
-import { Button, Input } from '@ui-kitten/components'
+import { Button, Input, Text } from '@ui-kitten/components'
 import { default as theme } from '../../theme.json';
 import Row from '../components/Row'
 import { useNavigation } from '@react-navigation/native'
 import { LISTMARGIN } from '../../constant'
 import { getSuggestedLocation } from '../services/location'
 import { debounce } from 'lodash'
+import { getFormattedLocationText } from '../utils/getFormattedLocationText'
 
 const FindLocationScreen = () => {
     const [value, setValue] = useState("");
@@ -37,7 +38,7 @@ const FindLocationScreen = () => {
             }, 500)
 
             debounceSearch();
-        }else{
+        } else {
             setSuggestion([])
         }
     }
@@ -75,11 +76,33 @@ const FindLocationScreen = () => {
         )
     }
 
+    const SuggestedText = ({locationItem}) => {
+        const location = getFormattedLocationText(locationItem, "auto");
+        return (
+            <Row style={styles.suggestionContainer}>
+                <Text>{locationItem?.address?.name}</Text>
+            </Row>
+        )
+    }
+    console.log(suggestions);
     return (
         <Screen>
             {Platform.OS === 'ios' && <ModalHeader />}
             <View style={{ marginHorizontal: LISTMARGIN }}>
                 {getInput()}
+                {suggestions.length > 0 ?
+                    (<FlatList
+                        keyExtractor={(item, index) => item.place_id + index}
+                        data={suggestions}
+                        showsVerticalScrollIndicator={false}
+                        renderItem={({ item }) => (
+                            <TouchableOpacity>
+                                <SuggestedText locationItem={item} />
+                            </TouchableOpacity>
+                        )}
+                    />)
+                    : null
+                }
             </View>
         </Screen>
     )
@@ -91,5 +114,12 @@ const styles = StyleSheet.create({
     defaultMarginTop: {
         marginTop: 10,
 
-    }
+    },
+
+    suggestionContainer: {
+        alignItems: "center",
+        padding: 15,
+        borderBottomWidth: 1,
+        borderBottomColor: '#d4d4d4',
+    },
 })
