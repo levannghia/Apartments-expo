@@ -80,11 +80,11 @@ const FindLocationScreen = () => {
         const location = getFormattedLocationText(locationItem, "auto");
         return (
             <Row style={styles.suggestionContainer}>
-                <Text>{locationItem?.address?.name}</Text>
+                <Text>{location}</Text>
             </Row>
         )
     }
-    console.log(suggestions);
+
     return (
         <Screen>
             {Platform.OS === 'ios' && <ModalHeader />}
