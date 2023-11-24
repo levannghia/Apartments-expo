@@ -1,45 +1,76 @@
 import { StyleSheet, View } from 'react-native'
-import React, {useState} from 'react'
-import { default as theme } from '../../theme.json';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react'
 import { Text, Button } from '@ui-kitten/components';
 import RecentSearchButton from './RecentSearchButton';
 import { getFormattedLocationText } from '../utils/getFormattedLocationText';
-import ShowMore from './ShowMore';
 
-const RecentSearchList = ({recenSearches, style}) => {
+const RecentSearchList = ({ recentSearches, style }) => {
     const [showMore, setShowMore] = useState(false)
+    const handleButtonPress = () => setShowMore(!showMore);
+
+    const handleRecentSearchButtonPress = (location) => {
+        navigation.navigate("Root", {
+            screen: "Search",
+            params: {
+                location: getFormattedLocationText(location, "autocomplete"),
+                lat: location.lat,
+                lon: location.lon,
+                boundingBox: location.boundingbox,
+            },
+        });
+    };
+
+    const ShowButton = ({ text }) => (
+        <Button
+            appearance={"ghost"}
+            status={"info"}
+            style={styles.showButton}
+            onPress={handleButtonPress}
+        >
+            {text}
+        </Button>
+    );
 
     const getList = () => {
-        if(!recenSearches || recenSearches.length > 0){
-            if(recenSearches.length > 2 && !showMore){
-                return (
-                    <>
-                        {recenSearches.map((item, index) => index > 2 ? (
-                               <RecentSearchButton
-                               key={item.display_name + index}
-                               name={getFormattedLocationText(item)}
-                               style={styles.recenSearchButton}
-                           />
-                        ) : null)}
-                        <ShowMore text="See More"/>
-                    </>
-                )
-            }
+        if (!recentSearches || recentSearches.length === 0) return;
+        if (recentSearches.length > 2 && !showMore) {
+            return (
+                <>
+                    {recentSearches.map((item, index) => index > 2 ? (
+                        <RecentSearchButton
+                            key={item.display_name + index}
+                            name={getFormattedLocationText(item, 'autocomplete')}
+                            style={styles.recentSearchButton}
+                            onPress={() => handleRecentSearchButtonPress(item)}
+                        />
+                    ) : null)}
+                    <ShowMore text="See More" />
+                </>
+            )
+        } else {
+            return (
+                <>
+                    {recentSearches.map((item, index) => (
+                        <RecentSearchButton
+                            key={item.display_name + index}
+                            name={getFormattedLocationText(item, "autocomplete")}
+                            style={styles.recentSearchButton}
+                            onPress={() => handleRecentSearchButtonPress(item)}
+                        />
+                    ))}
+                    {recentSearches.length > 2 ? <ShowButton text="See Less" /> : null}
+                </>
+            );
         }
     }
-  return (
-    <View>
-      <Text>RecentSearchList</Text>
-    </View>
-  )
+    return (
+        <View style={style}>{getList()}</View>
+    )
 }
 
 export default RecentSearchList
 
 const styles = StyleSheet.create({
-    recenSearchButton: {
-
-    }
+    recentSearchButton: { marginVertical: 5 },
+    showButton: { alignSelf: "flex-start" },
 })

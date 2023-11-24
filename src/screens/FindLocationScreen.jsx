@@ -11,11 +11,35 @@ import { getSuggestedLocation } from '../services/location'
 import { debounce } from 'lodash'
 import { getFormattedLocationText } from '../utils/getFormattedLocationText'
 import CurrentLocationButton from '../components/CurrentLocationButton'
+import RecentSearchList from '../components/RecentSearchList'
+import { useQueryClient } from 'react-query'
 
 const FindLocationScreen = () => {
     const [value, setValue] = useState("");
     const [suggestions, setSuggestion] = useState([])
     const navigation = useNavigation()
+    const queryClient = useQueryClient()
+    const recentSearches = queryClient.getQueryData("recentSearches")
+    const setRecentSearch = (location) => {
+        queryClient.setQueryData("recentSearches", () => {
+            if (recentSearches) {
+                let included = false;
+                for (let i of recentSearches) {
+                    if (
+                        i.display_name === location.display_name &&
+                        i.lon === location.lon &&
+                        i.lat === location.lat
+                    ) {
+                        included = true;
+                        break;
+                    }
+                }
+                if (!included) return [location, ...recentSearches];
+                return recentSearches;
+            }
+            return [location];
+        });
+    }
 
     const handleSubmitEditing = async () => {
         const locations = await getSuggestedLocation(value)
@@ -45,6 +69,7 @@ const FindLocationScreen = () => {
     }
 
     const handleNavigate = (location) => {
+        setRecentSearch(location);
         navigation.navigate('Root', {
             screen: 'Search',
             params: {
@@ -89,7 +114,7 @@ const FindLocationScreen = () => {
         )
     }
 
-    const SuggestedText = ({locationItem}) => {
+    const SuggestedText = ({ locationItem }) => {
         const location = getFormattedLocationText(locationItem, "auto");
         return (
             <Row style={styles.suggestionContainer}>
@@ -116,7 +141,8 @@ const FindLocationScreen = () => {
                     />)
                     : (
                         <ScrollView bounces={false}>
-                            <CurrentLocationButton style={styles.CurrentLocationButton}/>
+                            <CurrentLocationButton style={styles.CurrentLocationButton} />
+                            <RecentSearchList recentSearches={recentSearches} style={styles.recentSearchContainer} />
                         </ScrollView>
                     )
                 }
@@ -141,6 +167,8 @@ const styles = StyleSheet.create({
     },
 
     CurrentLocationButton: {
-        marginTop: 40
-    }
+        marginTop: 30
+    },
+    
+    recentSearchContainer: { marginTop: 30 },
 })
