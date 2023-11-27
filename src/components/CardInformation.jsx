@@ -9,7 +9,7 @@ const CardInformation = ({property}) => {
     return (
         <View style={{ paddingHorizontal: 5, paddingVertical: 10, borderColor: '#d3d3d3', borderRadius: 5, borderWidth: 1, borderBottomLeftRadius: 5, borderBottomRightRadius: 5 }}>
             <Row style={{ justifyContent: 'space-between' }}>
-                <Text category='c1'>{property.rentLow.toLocaleString()} - {property.rentHeight.toLocaleString()}</Text>
+                <Text category='c1'>{property.rentLow} - {property.rentHeight}</Text>
                 <MaterialCommunityIcons name="cards-heart-outline" size={24} color={theme['color-primary-500']} />
             </Row>
             <Text category={'c1'}>

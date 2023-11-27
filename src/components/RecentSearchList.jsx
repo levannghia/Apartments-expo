@@ -2,9 +2,11 @@ import { StyleSheet, View } from 'react-native'
 import React, { useState } from 'react'
 import { Text, Button } from '@ui-kitten/components';
 import RecentSearchButton from './RecentSearchButton';
+import { useNavigation } from '@react-navigation/native';
 import { getFormattedLocationText } from '../utils/getFormattedLocationText';
 
 const RecentSearchList = ({ recentSearches, style }) => {
+    const navigation = useNavigation()
     const [showMore, setShowMore] = useState(false)
     const handleButtonPress = () => setShowMore(!showMore);
 
@@ -44,7 +46,7 @@ const RecentSearchList = ({ recentSearches, style }) => {
                             onPress={() => handleRecentSearchButtonPress(item)}
                         />
                     ) : null)}
-                    <ShowMore text="See More" />
+                    <ShowButton text="See More" />
                 </>
             )
         } else {

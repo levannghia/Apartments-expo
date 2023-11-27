@@ -1,17 +1,32 @@
 import { StyleSheet, View, Platform, TouchableOpacity } from 'react-native'
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { HEADERHEIGHT } from '../../constant'
 import { useNavigation } from '@react-navigation/native'
 import MapMarker from './MapMarker'
 import { default as theme } from '../../theme.json';
-import Card  from './Card'
+import Card from './Card'
 import MapView from 'react-native-maps';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Button } from '@ui-kitten/components'
+import { getPropertiesInArea } from '../data/properties'
 
-const Map = ({ properties, mapRef, initialRegion }) => {
+let mapRegion = undefined;
+
+const Map = ({ properties, mapRef, initialRegion, location, setLocation, setProperties }) => {
     const [activeIndex, setActiveIndex] = useState(-1)
+    const [showSearchAreaButton, setShowSearchAreaButton] = useState(false)
+    const [boundingBox, setBoundingBox] = useState([])
+    const [region, setRegion] = useState(mapRegion ? mapRegion : undefined)
     // const mapRef = useRef()
     const navigation = useNavigation()
+
+    useEffect(() => {
+        if (location === "Map Area") return;
+        if (initialRegion) {
+            setShowSearchAreaButton(false);
+            setRegion(initialRegion)
+        }
+    })
 
     const unFocusProperty = () => {
         setActiveIndex(-1);
@@ -23,24 +38,55 @@ const Map = ({ properties, mapRef, initialRegion }) => {
     };
 
     const handleMarkerPress = (index) => {
-        if (Platform.OS === 'ios') {
-            setTimeout(() => {
-                mapRef.current?.animateCamera({
-                    center: {
-                        latitude: properties[index].lat,
-                        longitude: properties[index].lng,
-                    },
-                })
-            }, 100)
-        }
 
+        setTimeout(() => {
+            mapRef.current?.animateCamera({
+                center: {
+                    latitude: properties[index].lat,
+                    longitude: properties[index].lng,
+                },
+            })
+        }, 100)
+
+        setTimeout(() => {
+            const newRegion = {
+                latitude: properties[index].lat,
+                latitudeDelta:
+                    region?.latitudeDelta && region.latitudeDelta < 4
+                        ? region.latitudeDelta
+                        : 4,
+                longitude: properties[index].lng,
+                longitudeDelta:
+                    region?.longitudeDelta && region.longitudeDelta < 4
+                        ? region.longitudeDelta
+                        : 4,
+            };
+
+            setRegion(newRegion);
+        }, 600);
         setActiveIndex(index);
         navigation.setOptions({ tabBarStyle: { display: "none" } });
     }
 
     return (
         <View style={styles.container}>
-            <MapView style={{ width: "100%", height: "100%" }} userInterfaceStyle={'light'} ref={mapRef} onPress={handleMapPress}>
+            <MapView style={{ width: "100%", height: "100%" }} userInterfaceStyle={'light'} ref={mapRef} onPress={handleMapPress}
+                provider={'google'}
+                onRegionChangeComplete={(region, isGesture) => {
+                    if (isGesture?.isGesture) {
+                        if (!showSearchAreaButton) setShowSearchAreaButton(true);
+                        const newBoundingBox = [
+                            region.latitude - region.latitudeDelta / 2,
+                            region.latitude + region.latitudeDelta / 2,
+                            region.longitude - region.longitudeDelta / 2,
+                            region.longitude + region.longitudeDelta / 2,
+                        ]
+
+                        setRegion(region)
+                        setBoundingBox(newBoundingBox)
+                    }
+                }}
+            >
                 {
                     properties &&
                     properties.map((i, index) =>
@@ -61,6 +107,16 @@ const Map = ({ properties, mapRef, initialRegion }) => {
                     )}
                     <Card property={properties[activeIndex]} style={styles.card} />
                 </>
+            )}
+            {showSearchAreaButton && activeIndex === -1 && (
+                <Button style={styles.searchAreaButton} appearance={'ghost'}
+                    onPress={() => {
+                        setProperties(getPropertiesInArea(boundingBox));
+                        setLocation("Map Area");
+                        mapRegion = region;
+                        setShowSearchAreaButton(false)
+                    }}
+                >Search Area</Button>
             )}
         </View>
     )
@@ -87,4 +143,7 @@ const styles = StyleSheet.create({
         left: 15,
         borderRadius: 30,
     },
+    searchAreaButton: {
+
+    }
 })

@@ -40,7 +40,7 @@ const FindLocationScreen = () => {
             return [location];
         });
     }
-
+    // console.log(recentSearches);
     const handleSubmitEditing = async () => {
         const locations = await getSuggestedLocation(value)
         if (location.length > 0) {

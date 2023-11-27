@@ -7,7 +7,7 @@ import { Text, Button, Divider } from '@ui-kitten/components'
 import Row from './Row';
 import { useNavigation } from '@react-navigation/native';
 
-const AnimatedListHeader = ({ scrollAnimation, mapShown, setMapShown, location }) => {
+const AnimatedListHeader = ({ scrollAnimation, mapShown, setMapShown, location, availableProperties }) => {
     const navigation = useNavigation();
     const [offsetAnimation] = useState(new Animated.Value(0))
     const [clampedScroll, setClampedScroll] = useState(
@@ -136,7 +136,7 @@ const AnimatedListHeader = ({ scrollAnimation, mapShown, setMapShown, location }
             <Row style={{ alignItems: 'center', justifyContent: 'space-between', marginHorizontal: LISTMARGIN, marginVertical: 5 }}>
                 <Row>
                     <MaterialCommunityIcons name='map-marker' size={18} color={theme['color-primary-500']} />
-                    <Text category='c1' appearance='hint'>12,510 Available</Text>
+                    <Text category='c1' appearance='hint'>{availableProperties ? `${availableProperties} Available` : 'Search Spaces'}</Text>
                     <TouchableOpacity>
                         <Text category='c1' style={{ color: theme['color-info-500'], fontWeight: 'bold', marginLeft: 5 }}>Save</Text>
                     </TouchableOpacity>
