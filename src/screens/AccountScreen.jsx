@@ -11,6 +11,10 @@ const AccountScreen = () => {
   const navigation = useNavigation()
   const user = false
 
+  const logout = () => {
+    
+  }
+
   const firstSignedOutButtons = [
     {
       label: "Add a Property",

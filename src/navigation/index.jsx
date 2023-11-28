@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { AccountScreen, SearchScreen, SavedScreen, NotFoundScreen, ModalScreen } from '../screens';
+import { AccountScreen, SearchScreen, SavedScreen, NotFoundScreen, ModalScreen, SignInScreen, SignUpScreen, ForgotPasswordScreen, ResetPasswordScreen } from '../screens';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { default as theme } from '../../theme.json';
 import FindLocationScreen from '../screens/FindLocationScreen';
@@ -23,13 +23,24 @@ function RootNavigator() {
             <Stack.Screen name="Root" component={BottomTabNavigator} options={{
                 headerShown: false
             }} />
-            
             <Stack.Screen name="NotFound" component={NotFoundScreen} />
             <Stack.Group screenOptions={{ presentation: "modal" }}>
                 <Stack.Screen name="Modal" component={ModalScreen} />
                 <Stack.Screen name="FindLocation" component={FindLocationScreen} options={{
-                headerShown: false
-            }} />
+                    headerShown: false
+                }} />
+                <Stack.Screen name="SignIn" component={SignInScreen} options={{
+                    headerShown: false
+                }}></Stack.Screen>
+                <Stack.Screen name="SignUp" component={SignUpScreen} options={{
+                    headerShown: false
+                }}></Stack.Screen>
+                <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} options={{
+                    headerShown: false
+                }}></Stack.Screen>
+                <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} options={{
+                    headerShown: false
+                }}></Stack.Screen>
             </Stack.Group>
         </Stack.Navigator>
     )

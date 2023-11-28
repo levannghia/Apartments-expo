@@ -10,12 +10,12 @@ const SignUpAndSignInButtons = ({ style }) => {
     return (
       <View style={style}>
         <Button
-        //  onPress={() => navigation.navigate("SignIn")}
+         onPress={() => navigation.navigate("SignIn")}
         >Sign In</Button>
         <Button
           appearance={"ghost"}
           style={styles.signUpButton}
-        //   onPress={() => navigation.navigate("SignUp")}
+          onPress={() => navigation.navigate("SignUp")}
         >
           Create Account
         </Button>
