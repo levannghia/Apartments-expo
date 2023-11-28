@@ -14,10 +14,14 @@ import { LISTMARGIN } from '../../constant';
 const SavedScreen = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [user, setUser] = useState(false);
+  const navigation = useNavigation();
+  const savedProperties = undefined;
+  
   const getButtonAppearance = (buttonIndex) => {
     if (activeIndex === buttonIndex) return "filled";
     return "ghost";
   };
+
 
   const handleButtonPress = (index) => {
     setActiveIndex(index);
@@ -33,6 +37,26 @@ const SavedScreen = () => {
           {subHeading}
         </Text>
       </View>
+    );
+  };
+
+  const getPropertiesFlatList = (properties) => {
+    return (
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        data={properties}
+        contentContainerStyle={{ marginTop: 10 }}
+        renderItem={({ item }) => (
+          <Card
+            property={item}
+            style={styles.card}
+            // onPress={() =>
+            //   navigation.navigate("PropertyDetails", { propertyID: item.ID })
+            // }
+          />
+        )}
+        keyExtractor={(item) => item.ID}
+      />
     );
   };
 
