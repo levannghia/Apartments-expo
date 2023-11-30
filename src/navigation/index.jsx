@@ -6,6 +6,7 @@ import { AccountScreen, SearchScreen, SavedScreen, NotFoundScreen, ModalScreen, 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { default as theme } from '../../theme.json';
 import FindLocationScreen from '../screens/FindLocationScreen';
+import SignUpOrSignInScreen from '../screens/SignUpOrSignInScreen';
 
 export function Navigation() {
     return (
@@ -39,6 +40,9 @@ function RootNavigator() {
                     headerShown: false
                 }}></Stack.Screen>
                 <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} options={{
+                    headerShown: false
+                }}></Stack.Screen>
+                <Stack.Screen name="SignUpOrSignIn" component={SignUpOrSignInScreen} options={{
                     headerShown: false
                 }}></Stack.Screen>
             </Stack.Group>

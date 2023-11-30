@@ -8,7 +8,7 @@ WebBrowser.maybeCompleteAuthSession();
 const GoogleButton = ({text, style, onPress}) => {
   return (
     <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
-        <GoogleButton style={styles.logo}/>
+        <GoogleLogo style={styles.logo}/>
         <Text style={styles.text}>{text}</Text>
     </TouchableOpacity>
   )

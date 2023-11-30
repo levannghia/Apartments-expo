@@ -3,7 +3,6 @@ import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Text, Input, Button } from "@ui-kitten/components";
 import * as yup from "yup";
-// import { object, string, number, date, InferType } from 'yup';
 import { Formik } from "formik";
 import { useNavigation } from "@react-navigation/native";
 import { Screen } from '../components/screen'
@@ -41,9 +40,8 @@ const SignInScreen = () => {
               handleChange,
               handleSubmit,
               setFieldTouched,
-            }) => {
-              return (
-                <>
+            }) => (
+              <>
                   <Input
                     style={styles.input}
                     value={values.email}
@@ -110,8 +108,7 @@ const SignInScreen = () => {
                     // onPress={async () => await appleAuth()}
                   />
                 </>
-              )
-            }}
+            )}
           </Formik>
         </View>
       </Screen>
