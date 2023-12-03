@@ -11,9 +11,28 @@ import FacebookButton from "../components/FacebookButton";
 import { AppleButton } from "../components/AppleButton";
 import OrDivider from "../components/OrDivider";
 import PasswordInput from "../components/PasswordInput";
-
+import { useMutation } from 'react-query';
+import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../hooks/useAuth';
+import { registerUser } from '../services/auth';
+import Loading from '../components/Loading';
 
 const SignUpScreen = () => {
+  const navigation = useNavigation();
+  const {login} = useAuth();
+
+  const nativeRegister = useMutation(
+    async (values) => {
+      const user = await registerUser(values.fullName, values.email, values.password);
+
+      if(user) {
+        login(user);
+        navigation.goBack()
+      }
+    }
+  )
+
+  if(nativeRegister.isLoading) return <Loading/>;
   
   return (
     <KeyboardAwareScrollView bounces={false}>
@@ -25,14 +44,12 @@ const SignUpScreen = () => {
           </Text>
           <Formik
             initialValues={{
-              firstName: "",
-              lastName: "",
+              fullName: "",
               email: "",
               password: "",
             }}
             validationSchema={yup.object().shape({
-              firstName: yup.string().required("Your first name is required."),
-              lastName: yup.string().required("Your last name is required."),
+              fullName: yup.string().required("Your last name is required."),
               email: yup.string().email().required("Your email is required."),
               password: yup
                 .string()
@@ -43,7 +60,7 @@ const SignUpScreen = () => {
                 ),
             })}
             onSubmit={async (values) => {
-              await nativeRegister(values);
+              nativeRegister.mutate(values)
             }}
           >
             {({
@@ -60,22 +77,22 @@ const SignUpScreen = () => {
                   <Input
                     style={styles.input}
                     value={values.firstName}
-                    onChangeText={handleChange("firstName")}
-                    placeholder="Your First Name"
-                    label="First Name"
+                    onChangeText={handleChange("fullName")}
+                    placeholder="Your Full Name"
+                    label="Full Name"
                     autoComplete="name"
                     textContentType="givenName"
-                    onBlur={() => setFieldTouched("firstName")}
+                    onBlur={() => setFieldTouched("fullName")}
                     caption={
-                      touched.firstName && errors.firstName
-                        ? errors.firstName
+                      touched.fullName && errors.fullName
+                        ? errors.fullName
                         : undefined
                     }
                     status={
-                      touched.firstName && errors.firstName ? "danger" : "basic"
+                      touched.fullName && errors.fullName ? "danger" : "basic"
                     }
                   />
-                  <Input
+                  {/* <Input
                     style={styles.input}
                     value={values.lastName}
                     onChangeText={handleChange("lastName")}
@@ -92,7 +109,7 @@ const SignUpScreen = () => {
                     status={
                       touched.lastName && errors.lastName ? "danger" : "basic"
                     }
-                  />
+                  /> */}
                   <Input
                     style={styles.input}
                     value={values.email}

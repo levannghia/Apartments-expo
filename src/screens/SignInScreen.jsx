@@ -12,9 +12,26 @@ import FacebookButton from "../components/FacebookButton";
 import { AppleButton } from "../components/AppleButton";
 import PasswordInput from "../components/PasswordInput";
 import OrDivider from "../components/OrDivider";
+import { loginUser } from '../services/auth';
+import { useAuth } from '../hooks/useAuth';
+import { useMutation } from 'react-query';
+import Loading from '../components/Loading';
 
 const SignInScreen = () => {
   const navigation = useNavigation();
+  const {login} = useAuth()
+
+  const nativeLogin = useMutation(
+    async (values) => {
+      const user = await loginUser(values.email, values.password);
+      if(user) {
+        login(user);
+        navigation.goBack();
+      }
+    }
+  )
+
+  if(nativeLogin.isLoading) return <Loading/>
   return (
     <KeyboardAwareScrollView bounces={false}>
       <Screen>
@@ -30,7 +47,7 @@ const SignInScreen = () => {
               password: yup.string().required("A password is required."),
             })}
             onSubmit={(value) => {
-              console.log("login passing values to server: ", value);
+              nativeLogin.mutate(value)
             }}
           >
             {({

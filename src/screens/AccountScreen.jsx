@@ -1,19 +1,19 @@
 import { StyleSheet, View, ScrollView } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Screen } from '../components/screen'
 import SignUpAndSignInButtons from '../components/SignUpAndSignInButtons'
 import { default as theme } from '../../theme.json';
 import { Text, Button } from '@ui-kitten/components';
 import { useNavigation } from '@react-navigation/native';
 import ButtonList from '../components/ButtonList';
+import { useAuth } from '../hooks/useAuth';
+import { AuthContext } from '../../context';
 
 const AccountScreen = () => {
   const navigation = useNavigation()
-  const user = false
-
-  const logout = () => {
-    
-  }
+  const {user} = useContext(AuthContext);
+  const { logout } = useAuth()
+  console.log(user);
 
   const firstSignedOutButtons = [
     {
@@ -109,10 +109,10 @@ const AccountScreen = () => {
           {user ? (
             <>
               <Text style={styles.userName} category={"h4"}>
-                Welcome{user ? `, Nghia` : ""}
+                Welcome{user ? `, ${user.data.name}` : ""}
               </Text>
               <Text style={styles.email} category={"h6"}>
-                admin@gmail.com
+                {user.data.email}
               </Text>
             </>
           ) : (

@@ -13,12 +13,16 @@ androidHeight += androidNotch;
 
 export const HEADERHEIGHT = Platform.OS === "ios" ? iosHeight : androidHeight;
 
-const serverUrl = "http://testlrv.praz.vn/api";
+const serverUrl = "https://testlrv.praz.vn/api";
 const location = '/location';
+const auth = '/auth';
 
 const locationEndpoint = serverUrl + location;
+const authEndpoint = serverUrl + auth;
 
 export const endpoints = {
     autoCompeleteEndpoint: locationEndpoint + "/autocomplete",
-    searchEndpoint: locationEndpoint + "/search"
+    searchEndpoint: locationEndpoint + "/search",
+    login: authEndpoint + "/login",
+    register: authEndpoint + "/register",
 }

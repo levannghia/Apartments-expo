@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import { Screen } from '../components/screen'
 import { View, StyleSheet, FlatList } from "react-native";
 import { Button, Text } from "@ui-kitten/components";
@@ -10,10 +10,11 @@ import { properties } from "../data/properties";
 import Card  from "../components/Card";
 import SignUpAndSignInButtons from '../components/SignUpAndSignInButtons';
 import { LISTMARGIN } from '../../constant';
+import { AuthContext } from '../../context';
 
 const SavedScreen = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [user, setUser] = useState(false);
+  const {user} = useContext(AuthContext)
   const navigation = useNavigation();
   const savedProperties = undefined;
   
