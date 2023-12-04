@@ -2,6 +2,7 @@ import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import { Screen } from '../components/screen'
 import { Text, Input, Button } from "@ui-kitten/components";
+import * as Facebook from 'expo-auth-session/providers/facebook';
 import * as yup from "yup";
 import { Formik } from "formik";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
