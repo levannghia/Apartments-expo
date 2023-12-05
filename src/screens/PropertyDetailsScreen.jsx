@@ -24,7 +24,7 @@ const PropertyDetailsScreen = ({ route, style }) => {
           {item?.images ? <ImageCarousel images={item.images} /> : null}
           <View style={styles.contentContainer}>
             <PropertyHeaderSection property={property}/>
-            <Divider/>
+            <Divider style={styles.divider}/>
           </View>
           </>
         )}
