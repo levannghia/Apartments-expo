@@ -15,7 +15,7 @@ const SearchScreen = ({ route }) => {
   const [location, setLocation] = useState(null)
   const [scrollAnimation] = useState(new Animated.Value(0))
   const [mapShown, setMapShown] = useState(false)
-  const [properties, setProperties] = useState([])
+  // const [properties, setProperties] = useState(properties)
   const navigation = useNavigation()
 
   useEffect(() => {

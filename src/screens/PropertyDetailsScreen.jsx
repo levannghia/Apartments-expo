@@ -1,11 +1,12 @@
-import { StyleSheet, View, FlatList } from 'react-native'
+import { StyleSheet, View, FlatList, Dimensions } from 'react-native'
 import React from 'react'
 import { Screen } from '../components/screen'
 import ImageCarousel from '../components/ImageCarousel'
-import { Text } from '@ui-kitten/components'
+import { Text, Divider } from '@ui-kitten/components'
 import { properties } from '../data/properties'
 import { default as theme } from '../../theme.json';
 import { LISTMARGIN } from '../../constant'
+import PropertyHeaderSection from '../components/propertyDetailsSections/PropertyHeaderSection'
 // import { findIndex } from 'lodash'
 
 const PropertyDetailsScreen = ({ route, style }) => {
@@ -15,7 +16,6 @@ const PropertyDetailsScreen = ({ route, style }) => {
 
   return (
     <Screen>
-      <Text>{property.name}</Text>
       <FlatList
         data={[property]}
         keyExtractor={(item) => item.ID}
@@ -23,7 +23,8 @@ const PropertyDetailsScreen = ({ route, style }) => {
           <>
           {item?.images ? <ImageCarousel images={item.images} /> : null}
           <View style={styles.contentContainer}>
-            
+            <PropertyHeaderSection property={property}/>
+            <Divider/>
           </View>
           </>
         )}

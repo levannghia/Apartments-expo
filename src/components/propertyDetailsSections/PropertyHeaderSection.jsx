@@ -2,7 +2,8 @@ import { StyleSheet, View, Share } from 'react-native'
 import React, { useState } from 'react'
 import { Text } from "@ui-kitten/components";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
-import { default as theme } from '../../theme.json';
+import { default as theme } from '../../../theme.json';
+import { getStateAbbreviation } from '../../utils/getStateAbbreviation';
 import Row from '../Row';
 
 const PropertyHeaderSection = ({ property }) => {
@@ -42,7 +43,7 @@ const PropertyHeaderSection = ({ property }) => {
                         style={styles.shareIcon}
                     />
                     <MaterialCommunityIcons
-                        onPress={handleHeartPress}
+                        // onPress={handleHeartPress}
                         name={property?.liked ? "heart" : "heart-outline"}
                         size={30}
                         color={theme["color-primary-500"]}

@@ -22,7 +22,7 @@ const SignUpScreen = () => {
   const navigation = useNavigation();
   const {login} = useAuth();
   const [__, ___, fbPromptAsync] = Facebook.useAuthRequest({
-    clientId: "",
+    clientId: "341067331979268",
   })
 
   const facebookRegister = useMutation(
