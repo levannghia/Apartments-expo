@@ -8,6 +8,7 @@ import Map from '../components/Map';
 import { Text } from '@ui-kitten/components';
 import { properties, getPropertiesInArea } from '../data/properties'
 import LottieView from 'lottie-react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const SearchScreen = ({ route }) => {
   const mapRef = useRef();
@@ -15,6 +16,7 @@ const SearchScreen = ({ route }) => {
   const [scrollAnimation] = useState(new Animated.Value(0))
   const [mapShown, setMapShown] = useState(false)
   const [properties, setProperties] = useState([])
+  const navigation = useNavigation()
 
   useEffect(() => {
     if (route.params) {
@@ -93,7 +95,9 @@ const SearchScreen = ({ route }) => {
                 data={properties}
                 keyExtractor={(item) => item.ID}
                 renderItem={({ item }) => (
-                  <Card property={item} style={{ marginVertical: 5 }} />
+                  <Card property={item} style={{ marginVertical: 5 }} onPress={() =>
+                    navigation.navigate("PropertyDetail", { propertyID: item.ID })
+                  }/>
                 )}
               />
             ) : (

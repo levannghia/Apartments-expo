@@ -21,6 +21,19 @@ import Loading from '../components/Loading';
 const SignUpScreen = () => {
   const navigation = useNavigation();
   const {login} = useAuth();
+  const [__, ___, fbPromptAsync] = Facebook.useAuthRequest({
+    clientId: "",
+  })
+
+  const facebookRegister = useMutation(
+    async () => {
+      const response = await fbPromptAsync();
+      if(response.type === 'success'){
+        const {access_token} = response.params
+        console.log(access_token);
+      }
+    }
+  )
 
   const nativeRegister = useMutation(
     async (values) => {
@@ -162,7 +175,7 @@ const SignUpScreen = () => {
                   <FacebookButton
                     text="Sign up with Facebook"
                     style={styles.button}
-                    // onPress={async () => await facebookAuth()}
+                    onPress={async () => facebookRegister.mutate()}
                   />
                   <AppleButton
                     type="sign-up"

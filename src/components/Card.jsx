@@ -1,16 +1,16 @@
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Pressable } from 'react-native'
 import React from 'react'
 import ImageCarousel from './ImageCarousel';
 import CardInformation from './CardInformation';
 import { LISTMARGIN } from '../../constant'
 
-const Card = ({property, style}) => {
+const Card = ({property, style, onPress}) => {
 
   return (
-    <View style={[styles.container, styles.boxShadow, style]}>
-      <ImageCarousel images={property.images}/>
+    <Pressable onPress={onPress} style={[styles.container, styles.boxShadow, style]}>
+      <ImageCarousel onImagePress={onPress} images={property.images}/>
       <CardInformation property={property}/>
-    </View>
+    </Pressable>
   )
 }
 

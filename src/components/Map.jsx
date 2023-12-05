@@ -105,7 +105,9 @@ const Map = ({ properties, mapRef, initialRegion, location, setLocation, setProp
                             <MaterialCommunityIcons name='close' color={theme['color-primary-500']} size={24} />
                         </TouchableOpacity>
                     )}
-                    <Card property={properties[activeIndex]} style={styles.card} />
+                    <Card property={properties[activeIndex]} style={styles.card} onPress={() => {
+                        navigation.navigate("PropertyDetail", {proprtyId: properties[activeIndex].ID})
+                    }}/>
                 </>
             )}
             {showSearchAreaButton && activeIndex === -1 && (

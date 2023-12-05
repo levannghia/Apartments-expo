@@ -7,6 +7,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { default as theme } from '../../theme.json';
 import FindLocationScreen from '../screens/FindLocationScreen';
 import SignUpOrSignInScreen from '../screens/SignUpOrSignInScreen';
+import PropertyDetailsScreen from '../screens/PropertyDetailsScreen';
 
 export function Navigation() {
     return (
@@ -45,6 +46,10 @@ function RootNavigator() {
                 <Stack.Screen name="SignUpOrSignIn" component={SignUpOrSignInScreen} options={{
                     headerShown: false
                 }}></Stack.Screen>
+                <Stack.Screen name="PropertyDetail" component={PropertyDetailsScreen} options={{
+                    headerShown: false
+                }}>
+                </Stack.Screen>
             </Stack.Group>
         </Stack.Navigator>
     )

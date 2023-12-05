@@ -51,9 +51,9 @@ const SavedScreen = () => {
           <Card
             property={item}
             style={styles.card}
-            // onPress={() =>
-            //   navigation.navigate("PropertyDetails", { propertyID: item.ID })
-            // }
+            onPress={() =>
+              navigation.navigate("PropertyDetail", { propertyID: item.ID })
+            }
           />
         )}
         keyExtractor={(item) => item.ID}
