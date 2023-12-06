@@ -9,6 +9,7 @@ import { LISTMARGIN } from '../../constant'
 import PropertyHeaderSection from '../components/propertyDetailsSections/PropertyHeaderSection'
 import PricingAndFloorPlanSection from '../components/propertyDetailsSections/PricingAndFloorPlanSection'
 import AboutSection from '../components/propertyDetailsSections/AboutSection'
+import ContactSection from '../components/propertyDetailsSections/ContactSection'
 // import { findIndex } from 'lodash'
 
 const PropertyDetailsScreen = ({ route, style }) => {
@@ -31,6 +32,8 @@ const PropertyDetailsScreen = ({ route, style }) => {
             <PricingAndFloorPlanSection property={property}/>
             <Divider style={styles.divider}/>
             <AboutSection property={property}/>
+            <Divider style={styles.divider}/>
+            <ContactSection property={property}/>
             <Divider style={styles.divider}/>
           </View>
           </>

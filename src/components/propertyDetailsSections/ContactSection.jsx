@@ -3,8 +3,10 @@ import { Text, Button } from "@ui-kitten/components";
 import React from 'react'
 import { default as theme } from '../../../theme.json';
 import Row from '../Row';
+import { openURL } from '../../utils/openURL';
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+import { callPhoneNumber } from '../../utils/callPhoneNumber';
 
 const formatPhoneNumber = (str, callingCode) => {
     let cleaned = ("" + str).replace(/\D/g, "");
@@ -31,7 +33,7 @@ const ContactSection = ({ property }) => {
       <Text category={"h5"} style={styles.defaultMarginVertical}>
         Contact
       </Text>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={async () => await callPhoneNumber(property.phoneNumber)}>
         <Row style={styles.row}>
           <MaterialIcons
             name="smartphone"
@@ -46,12 +48,12 @@ const ContactSection = ({ property }) => {
       </TouchableOpacity>
       {property?.website ? (
         <TouchableOpacity
-        //   onPress={() =>
-        //     // can also use Linking.openURL but that takes you out of the app
-        //     {
-        //       if (property.website) openURL(property.website);
-        //     }
-        //   }
+          onPress={async () =>
+            // can also use Linking.openURL but that takes you out of the app
+            {
+              if (property.website) await openURL(property.website);
+            }
+          }
         >
           <Row style={styles.row}>
             <MaterialCommunityIcons
