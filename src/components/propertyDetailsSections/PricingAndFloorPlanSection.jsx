@@ -1,9 +1,19 @@
-import { StyleSheet, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, View, TouchableOpacity, Image } from 'react-native'
+import React, {useEffect, useState} from 'react'
 import { default as theme } from '../../../theme.json';
 import { TabBar } from '../TabBar';
 import Row from '../Row';
 import { Text, Divider } from '@ui-kitten/components';
+
+const removeUnnecessaryButtons = (
+    array,
+    title
+) => {
+    array.splice(
+        array.findIndex((i) => i.title === title),
+        1
+    );
+};
 
 const PricingAndFloorPlanSection = ({ property }) => {
     const [currentApartments, setCurrentApartments] = useState(
@@ -72,8 +82,7 @@ const PricingAndFloorPlanSection = ({ property }) => {
         if (!containsStudio) removeUnnecessaryButtons(floorPlanOptions, "Studio");
         if (!contains1Bed) removeUnnecessaryButtons(floorPlanOptions, "1 Bedroom");
         if (!contains2Bed) removeUnnecessaryButtons(floorPlanOptions, "2 Bedrooms");
-        if (!contains3Plus)
-            removeUnnecessaryButtons(floorPlanOptions, "3+ Bedrooms");
+        if (!contains3Plus) removeUnnecessaryButtons(floorPlanOptions, "3+ Bedrooms");
     }
     return (
         <>

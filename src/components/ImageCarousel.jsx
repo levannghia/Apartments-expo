@@ -1,7 +1,8 @@
-import { StyleSheet, Image, FlatList, TouchableOpacity, Pressable, View } from 'react-native'
+import { StyleSheet, Image, FlatList, TouchableOpacity, Pressable, View, Dimensions } from 'react-native'
 import React, { useRef, useState } from 'react'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { WIDTH } from '../../constant';
+import { Text } from '@ui-kitten/components';
 
 const ImageCarousel = ({
     images,
@@ -110,7 +111,7 @@ export default ImageCarousel
 const styles = StyleSheet.create({
     image: {
         height: 200,
-        width: WIDTH,
+        width: Dimensions.get('window').width,
         borderTopRightRadius: 5,
         borderTopLeftRadius: 5,
       },

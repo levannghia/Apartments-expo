@@ -1,9 +1,9 @@
 import { TouchableOpacity, StyleSheet} from "react-native";
 import { Text } from "@ui-kitten/components";
-import { useState } from "react";
+import React, { useState } from "react";
 
-import { theme } from "../theme";
-import { Row } from "./Row";
+import { default as theme } from '../../theme.json';
+import Row from "./Row";
 
 export const TabBar = ({
     tabs,
@@ -11,7 +11,7 @@ export const TabBar = ({
 }) => {
     const [activeIndex, setActiveIndex] = useState(0);
 
-    const handlePress = (index) => {
+    const handlePress = (index, func) => {
         setActiveIndex(index);
         func();
     };
