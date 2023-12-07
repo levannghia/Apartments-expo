@@ -7,6 +7,10 @@ import ResetPasswordScreen from "./ResetPasswordScreen";
 import ForgotPasswordScreen from "./ForgotPasswordScreen";
 import SignInScreen from "./SignInScreen";
 import SignUpScreen from "./SignUpScreen";
+import SignUpOrSignInScreen from "./SignUpOrSignInScreen";
+import PropertyDetailsScreen from "./PropertyDetailsScreen";
+import MessageScreen from "./MessageScreen";
+import FindLocationScreen from "./FindLocationScreen";
 
 export {
     SearchScreen,
@@ -17,5 +21,9 @@ export {
     ResetPasswordScreen,
     ForgotPasswordScreen,
     SignInScreen,
+    SignUpOrSignInScreen,
     SignUpScreen,
+    PropertyDetailsScreen,
+    MessageScreen,
+    FindLocationScreen,
 }

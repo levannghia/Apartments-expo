@@ -2,12 +2,23 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { AccountScreen, SearchScreen, SavedScreen, NotFoundScreen, ModalScreen, SignInScreen, SignUpScreen, ForgotPasswordScreen, ResetPasswordScreen } from '../screens';
+import {
+    AccountScreen,
+    SearchScreen,
+    SavedScreen,
+    NotFoundScreen,
+    ModalScreen,
+    SignInScreen,
+    SignUpScreen,
+    ForgotPasswordScreen,
+    ResetPasswordScreen,
+    FindLocationScreen,
+    SignUpOrSignInScreen,
+    PropertyDetailsScreen,
+    MessageScreen
+} from '../screens';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { default as theme } from '../../theme.json';
-import FindLocationScreen from '../screens/FindLocationScreen';
-import SignUpOrSignInScreen from '../screens/SignUpOrSignInScreen';
-import PropertyDetailsScreen from '../screens/PropertyDetailsScreen';
 
 export function Navigation() {
     return (
@@ -28,28 +39,14 @@ function RootNavigator() {
             <Stack.Screen name="NotFound" component={NotFoundScreen} />
             <Stack.Group screenOptions={{ presentation: "modal" }}>
                 <Stack.Screen name="Modal" component={ModalScreen} />
-                <Stack.Screen name="FindLocation" component={FindLocationScreen} options={{
-                    headerShown: false
-                }} />
-                <Stack.Screen name="SignIn" component={SignInScreen} options={{
-                    headerShown: false
-                }}></Stack.Screen>
-                <Stack.Screen name="SignUp" component={SignUpScreen} options={{
-                    headerShown: false
-                }}></Stack.Screen>
-                <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} options={{
-                    headerShown: false
-                }}></Stack.Screen>
-                <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} options={{
-                    headerShown: false
-                }}></Stack.Screen>
-                <Stack.Screen name="SignUpOrSignIn" component={SignUpOrSignInScreen} options={{
-                    headerShown: false
-                }}></Stack.Screen>
-                <Stack.Screen name="PropertyDetail" component={PropertyDetailsScreen} options={{
-                    headerShown: false
-                }}>
-                </Stack.Screen>
+                <Stack.Screen name="FindLocation" component={FindLocationScreen} options={{headerShown: false}} />
+                <Stack.Screen name="SignIn" component={SignInScreen} options={{headerShown: false}}/>
+                <Stack.Screen name="SignUp" component={SignUpScreen} options={{headerShown: false}}/>
+                <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} options={{headerShown: false}}/>
+                <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} options={{headerShown: false}}/>
+                <Stack.Screen name="SignUpOrSignIn" component={SignUpOrSignInScreen} options={{headerShown: false}}/>
+                <Stack.Screen name="PropertyDetail" component={PropertyDetailsScreen} options={{headerShown: false}}/>
+                <Stack.Screen name="Message" component={MessageScreen} options={{headerShown: false}}/>
             </Stack.Group>
         </Stack.Navigator>
     )

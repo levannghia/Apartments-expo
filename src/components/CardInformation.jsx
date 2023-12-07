@@ -4,8 +4,10 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Row from './Row';
 import { Text, Button } from '@ui-kitten/components'
 import { default as theme } from '../../theme.json';
+import { useNavigation } from '@react-navigation/native';
 
 const CardInformation = ({property}) => {
+    const navigation = useNavigation()
     return (
         <View style={{ paddingHorizontal: 5, paddingVertical: 10, borderColor: '#d3d3d3', borderRadius: 5, borderWidth: 1, borderBottomLeftRadius: 5, borderBottomRightRadius: 5 }}>
             <Row style={{ justifyContent: 'space-between' }}>
@@ -31,7 +33,9 @@ const CardInformation = ({property}) => {
                 <Button appearance='ghost' size='small' style={{
                     borderColor: theme['color-primary-500'],
                     width: '48%'
-                }}>Email</Button>
+                }}
+                onPress={() => navigation.navigate('Message', {propertyID: property.ID})}
+                >Email</Button>
                 <Button appearance='filled' size='small' style={{
                     width: '48%',
                     backgroundColor: theme['color-primary-500']
