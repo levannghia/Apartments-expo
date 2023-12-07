@@ -15,7 +15,8 @@ import {
     FindLocationScreen,
     SignUpOrSignInScreen,
     PropertyDetailsScreen,
-    MessageScreen
+    MessagePropertyScreen,
+    MessageScreen,
 } from '../screens';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { default as theme } from '../../theme.json';
@@ -33,9 +34,7 @@ const Stack = createNativeStackNavigator();
 function RootNavigator() {
     return (
         <Stack.Navigator>
-            <Stack.Screen name="Root" component={BottomTabNavigator} options={{
-                headerShown: false
-            }} />
+            <Stack.Screen name="Root" component={BottomTabNavigator} options={{headerShown: false}} />
             <Stack.Screen name="NotFound" component={NotFoundScreen} />
             <Stack.Group screenOptions={{ presentation: "modal" }}>
                 <Stack.Screen name="Modal" component={ModalScreen} />
@@ -46,6 +45,7 @@ function RootNavigator() {
                 <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} options={{headerShown: false}}/>
                 <Stack.Screen name="SignUpOrSignIn" component={SignUpOrSignInScreen} options={{headerShown: false}}/>
                 <Stack.Screen name="PropertyDetail" component={PropertyDetailsScreen} options={{headerShown: false}}/>
+                <Stack.Screen name="MessageProperty" component={MessagePropertyScreen} options={{headerShown: false}}/>
                 <Stack.Screen name="Message" component={MessageScreen} options={{headerShown: false}}/>
             </Stack.Group>
         </Stack.Navigator>

@@ -9,8 +9,9 @@ import SignInScreen from "./SignInScreen";
 import SignUpScreen from "./SignUpScreen";
 import SignUpOrSignInScreen from "./SignUpOrSignInScreen";
 import PropertyDetailsScreen from "./PropertyDetailsScreen";
-import MessageScreen from "./MessageScreen";
+import MessagePropertyScreen from "./MessagePropertyScreen";
 import FindLocationScreen from "./FindLocationScreen";
+import MessageScreen from "./MessageScreen";
 
 export {
     SearchScreen,
@@ -24,6 +25,7 @@ export {
     SignUpOrSignInScreen,
     SignUpScreen,
     PropertyDetailsScreen,
-    MessageScreen,
+    MessagePropertyScreen,
     FindLocationScreen,
+    MessageScreen,
 }
