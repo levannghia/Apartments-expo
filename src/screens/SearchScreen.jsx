@@ -93,7 +93,7 @@ const SearchScreen = ({ route }) => {
                 contentContainerStyle={{ paddingTop: HEADERHEIGHT - 20 }}
                 showsVerticalScrollIndicator={false}
                 data={properties}
-                keyExtractor={(item) => item.ID}
+                keyExtractor={(item) => item.ID.toString()}
                 renderItem={({ item }) => (
                   <Card property={item} style={{ marginVertical: 5 }} onPress={() =>
                     navigation.navigate("PropertyDetail", { propertyID: item.ID })

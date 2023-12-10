@@ -10,6 +10,9 @@ import PropertyHeaderSection from '../components/propertyDetailsSections/Propert
 import PricingAndFloorPlanSection from '../components/propertyDetailsSections/PricingAndFloorPlanSection'
 import AboutSection from '../components/propertyDetailsSections/AboutSection'
 import ContactSection from '../components/propertyDetailsSections/ContactSection'
+import AmentitiesSection from '../components/propertyDetailsSections/AmentitiesSection'
+import LeaseAndFeesSection from '../components/propertyDetailsSections/LeaseAndFeesSection'
+import LocationSection from '../components/propertyDetailsSections/LocationSection'
 // import { findIndex } from 'lodash'
 
 const PropertyDetailsScreen = ({ route, style }) => {
@@ -34,6 +37,12 @@ const PropertyDetailsScreen = ({ route, style }) => {
             <AboutSection property={property}/>
             <Divider style={styles.divider}/>
             <ContactSection property={property}/>
+            <Divider style={styles.divider}/>
+            <AmentitiesSection property={property}/>
+            <Divider style={styles.divider}/>
+            <LeaseAndFeesSection property={property}/>
+            <Divider style={styles.divider}/>
+            <LocationSection property={property}/>
             <Divider style={styles.divider}/>
           </View>
           </>
