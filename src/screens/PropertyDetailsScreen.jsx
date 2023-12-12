@@ -1,4 +1,4 @@
-import { StyleSheet, View, FlatList, Dimensions } from 'react-native'
+import { StyleSheet, View, FlatList, Dimensions, Linking } from 'react-native'
 import React from 'react'
 import { Screen } from '../components/screen'
 import ImageCarousel from '../components/ImageCarousel'
@@ -13,6 +13,7 @@ import ContactSection from '../components/propertyDetailsSections/ContactSection
 import AmentitiesSection from '../components/propertyDetailsSections/AmentitiesSection'
 import LeaseAndFeesSection from '../components/propertyDetailsSections/LeaseAndFeesSection'
 import LocationSection from '../components/propertyDetailsSections/LocationSection'
+import ReviewSection from '../components/propertyDetailsSections/ReviewSection'
 // import { findIndex } from 'lodash'
 
 const PropertyDetailsScreen = ({ route, style }) => {
@@ -20,6 +21,12 @@ const PropertyDetailsScreen = ({ route, style }) => {
   const index = properties.findIndex(i => i.ID === propertyID);
   const property = properties[index]
 
+  // Linking.getInitialURL().then(url => {
+  //   // if (url) {
+  //   // }
+  //   console.log('URL của ứng dụng:', url);
+  // });
+ 
   return (
     <Screen>
       <FlatList
@@ -43,6 +50,8 @@ const PropertyDetailsScreen = ({ route, style }) => {
             <LeaseAndFeesSection property={property}/>
             <Divider style={styles.divider}/>
             <LocationSection property={property}/>
+            <Divider style={styles.divider}/>
+            <ReviewSection property={property}/>
             <Divider style={styles.divider}/>
           </View>
           </>

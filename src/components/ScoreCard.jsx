@@ -40,4 +40,16 @@ const ScoreCard = ({ score, style}) => {
 
 export default ScoreCard
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    borderRadius: 5,
+    borderColor: theme["color-gray"],
+    borderWidth: 1,
+    padding: 12,
+    width: 250,
+    justifyContent: "space-between",
+  },
+  activeBackground: { backgroundColor: theme["color-gray"] },
+  row: { justifyContent: "space-between", marginBottom: 30 },
+  mainText: { width: "75%" },
+});
