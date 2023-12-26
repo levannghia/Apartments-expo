@@ -17,6 +17,8 @@ import {
     PropertyDetailsScreen,
     MessagePropertyScreen,
     MessageScreen,
+    AddPropertyScreen,
+    CreateManagerScreen,
 } from '../screens';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { default as theme } from '../../theme.json';
@@ -47,6 +49,8 @@ function RootNavigator() {
                 <Stack.Screen name="PropertyDetail" component={PropertyDetailsScreen} options={{headerShown: false}}/>
                 <Stack.Screen name="MessageProperty" component={MessagePropertyScreen} options={{headerShown: false}}/>
                 <Stack.Screen name="Message" component={MessageScreen} options={{headerShown: false}}/>
+                <Stack.Screen name="AddProperty" component={AddPropertyScreen} options={{headerShown: false}}/>
+                <Stack.Screen name="CreateManager" component={CreateManagerScreen} options={{headerShown: false}}/>
             </Stack.Group>
         </Stack.Navigator>
     )

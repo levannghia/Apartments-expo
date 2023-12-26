@@ -12,6 +12,8 @@ import PropertyDetailsScreen from "./PropertyDetailsScreen";
 import MessagePropertyScreen from "./MessagePropertyScreen";
 import FindLocationScreen from "./FindLocationScreen";
 import MessageScreen from "./MessageScreen";
+import AddPropertyScreen from "./AddPropertyScreen";
+import CreateManagerScreen from "./CreateManagerScreen";
 
 export {
     SearchScreen,
@@ -28,4 +30,6 @@ export {
     MessagePropertyScreen,
     FindLocationScreen,
     MessageScreen,
+    AddPropertyScreen,
+    CreateManagerScreen
 }
