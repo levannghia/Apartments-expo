@@ -9,9 +9,11 @@ import axios from "axios";
 import { Screen } from "../components/screen";
 import ModalHeader from "../components/ModalHeader";
 import { LISTMARGIN } from "../../constant";
+import PhoneInputCustom from "../components/PhoneInputCustom";
 
 const CreateManagerScreen = () => {
     const [imageURI, setImageURI] = useState('');
+    const phoneRef = useRef();
 
     const pickImage = async (setBase64Image, field) => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -113,6 +115,12 @@ const CreateManagerScreen = () => {
                                     status={
                                         touched.website && errors.website ? "danger" : "basic"
                                     }
+                                />
+                                <PhoneInputCustom
+                                    onChangeText={handleChange("phoneNumber")}
+                                    phoneNumber={values.phoneNumber}
+                                    style={styles.input}
+                                    phoneRef={phoneRef}
                                 />
 
                                 {imageURI ? (

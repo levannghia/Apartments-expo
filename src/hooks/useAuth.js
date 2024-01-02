@@ -17,7 +17,7 @@ export const useAuth = () => {
     const logout = () => {
         setUser(null);
         SecureStore.deleteItemAsync("user");
-        queryClient.clear();
+        queryClient.clear(); 
     }
 
     return {user, login, logout};
